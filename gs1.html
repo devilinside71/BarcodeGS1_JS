@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>Blank</title>
+    <link href="styles/barcode.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="scripts/gs1.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            start();
+        }
+    </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 419px;
+        }
+    </style>
+</head>
+
+<body class="bodyStyle">
+    <form method="post">
+        <p>GS1 vonalkód:
+            <input name="Text1" type="text" id="codeCat" value="01059965271763401020141719073121280122804" class="auto-style1" />
+        </p>
+
+        <input name="Button1" type="button" value="Ellenőrzés" id="codeCheck" />
+    </form>
+
+    <p id="resCodeStart"></p>
+    <p id="resGTIN"></p>
+    <p id="resLOTinit"></p>
+    <p id="resLOTnumber"></p>
+    <p id="resExpirationInit"></p>
+    <p id="resExpiration"></p>
+    <p id="resCatalogInit"></p>
+    <p id="resCatalog"></p>
+
+
+    <p id="resCatalogNum"></p>
+    <p id="resCatalogChecksum"></p>
+    <p id="resQuantity"></p>
+
+    <p id="resLOTCodeStart"></p>
+    <p id="resLOTNum"></p>
+    <p id="resLOTlink"></p>
+    <p id="resLOTCheckDigit"></p>
+
+    <p id="test"></p>
+
+
+
+</body>
+
+</html>
