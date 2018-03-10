@@ -4,17 +4,13 @@ function start() {
 }
 
 function codeCheckClick() {
-    var codeCat = document.getElementById('codeCat').value;
+    var barcode = document.getElementById('barcode').value;
 
 
-    document.getElementById("resCodeStart").innerHTML = "Kód kezdete: " + checkCodeStart(codeCat);
-    document.getElementById("resGTIN").innerHTML = "GTIN: " + getGTIN(codeCat);
-    document.getElementById("resLOTinit").innerHTML = "LOT init: " + checkLOTinit(codeCat);
-    document.getElementById("resLOTnumber").innerHTML = "LOT: " + getLOTnumber(codeCat);
-    document.getElementById("resExpirationInit").innerHTML = "Expiration init: " + checkExpirationInit(codeCat);
-    document.getElementById("resExpiration").innerHTML = "Expiration: " + getExpiration(codeCat);
-    document.getElementById("resCatalogInit").innerHTML = "Catalog init: " + checkCatalogInit(codeCat);
-    document.getElementById("resCatalog").innerHTML = "Catalog: " + getCatalog(codeCat);
+    document.getElementById("checkGTINID").innerHTML = "GTIN ID: " + checkGTINID(barcode);
+    document.getElementById("formatBarcode").innerHTML = "GS1 formatted barcode: " + formatBarcode(barcode);
+
+
 }
 
 
@@ -22,13 +18,31 @@ function codeCheckClick() {
  * @param  {str} code barcode
  * @returns {bool} wether barcode starts with 01
  */
-function checkCodeStart(code) {
+function checkGTINID(code) {
     var ret = false;
     if (code.slice(0, 2) == "01") {
         ret = true;
     }
     return ret;
 }
+
+/**Format barcode  
+ * @param  {str} code
+ * @returns {str} formatted barcode
+ */
+function formatBarcode(code) {
+    var ret = "";
+    ret = replaceAll(code, "\\(", "");
+    ret = replaceAll(ret, "\\)", "");
+    return ret;
+}
+
+function verify(code) {
+    var ret = false;
+
+    return ret;
+}
+
 
 function getGTIN(code) {
     return code.slice(2, 16);
@@ -68,4 +82,9 @@ function checkCatalogInit(code) {
 
 function getCatalog(code) {
     return code.slice(32, 41);
+}
+
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(find, 'g'), replace);
 }
