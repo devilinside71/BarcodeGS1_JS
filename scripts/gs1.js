@@ -14,6 +14,8 @@ function codeCheckClick() {
     document.getElementById("getLOTnumber").innerHTML = "LOT number: " + getLOTnumber(barcode);
     document.getElementById("getExpirationDate").innerHTML = "Expiration date: " + getExpirationDate(barcode);
     document.getElementById("getCatalogNumber").innerHTML = "Catalog number: " + getCatalogNumber(barcode);
+    var res = parseGS1(barcode)
+    document.getElementById("parseGS1").innerHTML = "Parsed GS1: " + res[0] + "*" + res[1] + "*" + res[2] + "*" + res[3];
 
 
 }
@@ -106,8 +108,23 @@ function getCatalogNumber(code) {
     return ret[4];
 }
 
-
-
+/**Parse GS1 code
+ * @param  {str} code barcode
+ * @returns {str[]} barcode elements, (01) EAN, (10) LOT, (17) expiration date, (21) catalog number
+ */
+function parseGS1(code) {
+    var ret = new Array("", "", "", "");
+    var res = "";
+    if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
+        var reg = new RegExp(/^01(\d{14})10(\d*)17(\d{6})21(\d{9})$/);
+        res = reg.exec(code);
+    }
+    ret[0] = res[1];
+    ret[1] = res[2];
+    ret[2] = res[3];
+    ret[3] = res[4];
+    return ret;
+}
 
 
 
