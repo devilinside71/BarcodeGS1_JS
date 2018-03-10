@@ -167,7 +167,12 @@ function createGS1(eanNumber, lotNumber, expirationDate, catalogNumber, withBrac
     return ret;
 }
 
-
+/**Replace all occurences in string with RegExp
+ * @param  {str} str text to search
+ * @param  {str} find old text
+ * @param  {str} replace new text
+ * @returns {str} modified text
+ */
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
