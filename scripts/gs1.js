@@ -5,7 +5,7 @@ function start() {
 
 function codeCheckClick() {
     var barcode = document.getElementById('barcode').value;
-
+    barcode = formatBarcode(barcode);
 
     document.getElementById("checkGTINID").innerHTML = "GTIN ID: " + checkGTINID(barcode);
     document.getElementById("formatBarcode").innerHTML = "GS1 formatted barcode: " + formatBarcode(barcode);
@@ -13,6 +13,7 @@ function codeCheckClick() {
     document.getElementById("getEANNumber").innerHTML = "EAN number: " + getEANnumber(barcode);
     document.getElementById("getLOTnumber").innerHTML = "LOT number: " + getLOTnumber(barcode);
     document.getElementById("getExpirationDate").innerHTML = "Expiration date: " + getExpirationDate(barcode);
+    document.getElementById("getCatalogNumber").innerHTML = "Catalog number: " + getCatalogNumber(barcode);
 
 
 }
@@ -92,37 +93,22 @@ function getExpirationDate(code) {
     return ret[3];
 }
 
-function checkLOTinit(code) {
-    var ret = false;
-    if (code.slice(16, 18) == "10") {
-        ret = true;
+/**Get catalog number
+ * @param  {str} code barcode
+ * @returns {str} catalog number
+ */
+function getCatalogNumber(code) {
+    var ret = "";
+    if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
+        var reg = new RegExp(/^01(\d{14})10(\d*)17(\d{6})21(\d{9})$/);
+        ret = reg.exec(code);
     }
-    return ret;
+    return ret[4];
 }
 
 
 
-function checkExpirationInit(code) {
-    var ret = false;
-    if (code.slice(22, 24) == "17") {
-        ret = true;
-    }
-    return ret;
-}
 
-
-
-function checkCatalogInit(code) {
-    var ret = false;
-    if (code.slice(30, 32) == "21") {
-        ret = true;
-    }
-    return ret;
-}
-
-function getCatalog(code) {
-    return code.slice(32, 41);
-}
 
 
 function replaceAll(str, find, replace) {
