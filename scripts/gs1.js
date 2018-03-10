@@ -12,6 +12,7 @@ function codeCheckClick() {
     document.getElementById("verify").innerHTML = "GS1 verified: " + verify(barcode);
     document.getElementById("getEANNumber").innerHTML = "EAN number: " + getEANnumber(barcode);
     document.getElementById("getLOTnumber").innerHTML = "LOT number: " + getLOTnumber(barcode);
+    document.getElementById("getExpirationDate").innerHTML = "Expiration date: " + getExpirationDate(barcode);
 
 
 }
@@ -57,7 +58,7 @@ function verify(code) {
  * @returns {str} EAN number
  */
 function getEANnumber(code) {
-    var ret="";
+    var ret = "";
     if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
         var reg = new RegExp(/^01(\d{14})/);
         ret = reg.exec(code);
@@ -70,12 +71,25 @@ function getEANnumber(code) {
  * @returns {str} LOT number (10)
  */
 function getLOTnumber(code) {
-    var ret="";
+    var ret = "";
     if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
         var reg = new RegExp(/^01(\d{14})10(\d*)17/);
         ret = reg.exec(code);
     }
     return ret[2];
+}
+
+/**Get expiration date
+ * @param  {str} code barcode
+ * @returns {str} expiration date YYDDMM (17)
+ */
+function getExpirationDate(code) {
+    var ret = "";
+    if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
+        var reg = new RegExp(/^01(\d{14})10(\d*)17(\d{6})21/);
+        ret = reg.exec(code);
+    }
+    return ret[3];
 }
 
 function checkLOTinit(code) {
@@ -96,9 +110,7 @@ function checkExpirationInit(code) {
     return ret;
 }
 
-function getExpiration(code) {
-    return code.slice(24, 30);
-}
+
 
 function checkCatalogInit(code) {
     var ret = false;
