@@ -16,10 +16,28 @@ function codeCheckClick() {
     document.getElementById("getCatalogNumber").innerHTML = "Catalog number: " + getCatalogNumber(barcode);
     var res = parseGS1(barcode)
     document.getElementById("parseGS1").innerHTML = "Parsed GS1: " + res[0] + "*" + res[1] + "*" + res[2] + "*" + res[3];
-
-
+    document.getElementById("GS1_1").innerHTML = "GS1_1: " +
+        createGS1(
+            document.getElementById("eancode").value,
+            document.getElementById("lotcode").value,
+            document.getElementById("expirationcode").value,
+            document.getElementById("catalogcode").value,
+            false
+        );
+    document.getElementById("GS1_2").innerHTML = "GS1_2: " +
+        createGS1(
+            document.getElementById("eancode").value,
+            document.getElementById("lotcode").value,
+            document.getElementById("expirationcode").value,
+            document.getElementById("catalogcode").value,
+            true
+        );
 }
 
+var gtinID = "01";
+var lotID = "10";
+var expirationDateID = "17";
+var catalogNumberID = "21";
 
 /**Check the firs character of the barcode
  * @param  {str} code barcode
@@ -126,6 +144,28 @@ function parseGS1(code) {
     return ret;
 }
 
+/**Create GS1 code
+ * @param  {str} eanNumber EAN number
+ * @param  {str} lotNumber LOT number
+ * @param  {str} expirationDate expiration date YYMMDD
+ * @param  {str} catalogNumber catalog number
+ * @param  {bool} withBrackets=false wether output contains 
+ * brackets for human reading
+ * @returns {str} GS1 barcode
+ */
+function createGS1(eanNumber, lotNumber, expirationDate, catalogNumber, withBrackets = false) {
+    var ret = "";
+    var bracketBefore = "";
+    var bracketAfter = "";
+    if (withBrackets) {
+        bracketBefore = "(";
+        bracketAfter = ")";
+    }
+    ret = bracketBefore + gtinID + bracketAfter + eanNumber + bracketBefore + lotID +
+        bracketAfter + lotNumber + bracketBefore + expirationDateID + bracketAfter + expirationDate +
+        bracketBefore + catalogNumberID + bracketAfter + catalogNumber;
+    return ret;
+}
 
 
 function replaceAll(str, find, replace) {
