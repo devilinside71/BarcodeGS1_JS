@@ -10,6 +10,7 @@ function codeCheckClick() {
     document.getElementById("checkGTINID").innerHTML = "GTIN ID: " + checkGTINID(barcode);
     document.getElementById("formatBarcode").innerHTML = "GS1 formatted barcode: " + formatBarcode(barcode);
     document.getElementById("verify").innerHTML = "GS1 verified: " + verify(barcode);
+    document.getElementById("getEANNumber").innerHTML = "EAN number: " + getEANNumber(barcode);
 
 
 }
@@ -51,8 +52,12 @@ function verify(code) {
 }
 
 
-function getGTIN(code) {
-    return code.slice(2, 16);
+function getEANNumber(code) {
+    if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
+        var e = new RegExp(/^01(\d{14})/);
+        ret = e.exec(code);
+    }
+    return ret[1];
 }
 
 function checkLOTinit(code) {
