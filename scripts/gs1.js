@@ -10,7 +10,8 @@ function codeCheckClick() {
     document.getElementById("checkGTINID").innerHTML = "GTIN ID: " + checkGTINID(barcode);
     document.getElementById("formatBarcode").innerHTML = "GS1 formatted barcode: " + formatBarcode(barcode);
     document.getElementById("verify").innerHTML = "GS1 verified: " + verify(barcode);
-    document.getElementById("getEANNumber").innerHTML = "EAN number: " + getEANNumber(barcode);
+    document.getElementById("getEANNumber").innerHTML = "EAN number: " + getEANnumber(barcode);
+    document.getElementById("getLOTnumber").innerHTML = "LOT number: " + getLOTnumber(barcode);
 
 
 }
@@ -29,7 +30,7 @@ function checkGTINID(code) {
 }
 
 /**Format barcode  
- * @param  {str} code
+ * @param  {str} code barcode
  * @returns {str} formatted barcode
  */
 function formatBarcode(code) {
@@ -40,8 +41,8 @@ function formatBarcode(code) {
 }
 
 /**Verify GS1 barcode   
- * @param  {str} code
- * @returns wether the code is 01..10..17..21.. format
+ * @param  {str} code barcode
+ * @returns {bool} wether the code is 01..10..17..21.. format
  */
 function verify(code) {
     var ret = false;
@@ -51,13 +52,30 @@ function verify(code) {
     return ret;
 }
 
-
-function getEANNumber(code) {
+/**Get EAN number
+ * @param  {str} code barcode
+ * @returns {str} EAN number
+ */
+function getEANnumber(code) {
+    var ret="";
     if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
-        var e = new RegExp(/^01(\d{14})/);
-        ret = e.exec(code);
+        var reg = new RegExp(/^01(\d{14})/);
+        ret = reg.exec(code);
     }
     return ret[1];
+}
+
+/**Get LOT number
+ * @param  {str} code barcode
+ * @returns {str} LOT number (10)
+ */
+function getLOTnumber(code) {
+    var ret="";
+    if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
+        var reg = new RegExp(/^01(\d{14})10(\d*)17/);
+        ret = reg.exec(code);
+    }
+    return ret[2];
 }
 
 function checkLOTinit(code) {
@@ -68,9 +86,7 @@ function checkLOTinit(code) {
     return ret;
 }
 
-function getLOTnumber(code) {
-    return code.slice(18, 22);
-}
+
 
 function checkExpirationInit(code) {
     var ret = false;
