@@ -9,6 +9,7 @@ function codeCheckClick() {
 
     document.getElementById("checkGTINID").innerHTML = "GTIN ID: " + checkGTINID(barcode);
     document.getElementById("formatBarcode").innerHTML = "GS1 formatted barcode: " + formatBarcode(barcode);
+    document.getElementById("verify").innerHTML = "GS1 verified: " + verify(barcode);
 
 
 }
@@ -37,9 +38,15 @@ function formatBarcode(code) {
     return ret;
 }
 
+/**Verify GS1 barcode   
+ * @param  {str} code
+ * @returns wether the code is 01..10..17..21.. format
+ */
 function verify(code) {
     var ret = false;
-
+    if (code.match(/^(01)(\d{14})10(\d*)17(\d{6})21(\d{9})$/)) {
+        ret = true;
+    }
     return ret;
 }
 
