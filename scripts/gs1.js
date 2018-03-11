@@ -40,7 +40,7 @@ function codeCheckClick() {
             document.getElementById("catalogcode").value,
             "ZPL"
         );
-    document.getElementById("GS1_4").innerHTML = "GS1_4 karakter Code128 fonthoz: " +
+    document.getElementById("GS1_4").innerHTML = "GS1_4 karakterek Code128 fonthoz: " +
         convertToXML(createGS1(
             document.getElementById("eancode").value,
             document.getElementById("lotcode").value,
