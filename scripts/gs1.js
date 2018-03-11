@@ -274,7 +274,8 @@ var GS1charDictC = {
  */
 function convertToXML(textToConvert = "") {
     var ret = "";
-    ret = replaceAll(textToConvert, "<", "&lt;");
+    ret = replaceAll(textToConvert, "&", "&amp;");
+    ret = replaceAll(ret, "<", "&lt;");
     ret = replaceAll(ret, ">", "&gt;");
     return ret;
 }
@@ -429,6 +430,7 @@ function createGS1(eanNumber = "", lotNumber = "", expirationDate = "", catalogN
         ret = ret + GS1charDictC[catalogNumber.slice(4, 6)] + GS1charDictC[catalogNumber.slice(6, 8)];
         ret = ret + "È" + catalogNumber.slice(8);
         //checkdigit
+        //TODO create checkdigit
         ret = ret + "p";
         //Stop
         ret = ret + "Î";
