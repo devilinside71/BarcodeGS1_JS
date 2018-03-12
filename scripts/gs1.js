@@ -62,6 +62,116 @@ var gtinID = "01";
 var lotID = "10";
 var expirationDateID = "17";
 var catalogNumberID = "21";
+var GS1charDictRev = {
+    "Â": 0,
+"!": 1,
+"\"": 2,
+"#": 3,
+"$": 4,
+"%": 5,
+"&": 6,
+"'": 7,
+"(": 8,
+")": 9,
+"*": 10,
+"&": 11,
+",": 12,
+"-": 13,
+".": 14,
+"/": 15,
+"0": 16,
+"1": 17,
+"2": 18,
+"3": 19,
+"4": 20,
+"5": 21,
+"6": 22,
+"7": 23,
+"8": 24,
+"9": 25,
+":": 26,
+";": 27,
+"<": 28,
+"=": 29,
+">": 30,
+"?": 31,
+"@": 32,
+"A": 33,
+"B": 34,
+"C": 35,
+"D": 36,
+"E": 37,
+"F": 38,
+"G": 39,
+"H": 40,
+"I": 41,
+"J": 42,
+"K": 43,
+"L": 44,
+"M": 45,
+"N": 46,
+"O": 47,
+"P": 48,
+"Q": 49,
+"R": 50,
+"S": 51,
+"T": 52,
+"U": 53,
+"V": 54,
+"W": 55,
+"X": 56,
+"Y": 57,
+"Z": 58,
+"[": 59,
+"\\": 60,
+"]": 61,
+"^": 62,
+"_": 63,
+"`": 64,
+"a": 65,
+"b": 66,
+"c": 67,
+"d": 68,
+"e": 69,
+"f": 70,
+"g": 71,
+"h": 72,
+"i": 73,
+"j": 74,
+"k": 75,
+"l": 76,
+"m": 77,
+"n": 78,
+"o": 79,
+"p": 80,
+"q": 81,
+"r": 82,
+"s": 83,
+"t": 84,
+"u": 85,
+"v": 86,
+"w": 87,
+"x": 88,
+"y": 89,
+"z": 90,
+"{": 91,
+"|": 92,
+"}": 93,
+"~": 94,
+"Ã": 95,
+"Ä": 96,
+"Å": 97,
+"Æ": 98,
+"Ç": 99,
+"È": 100,
+"É": 101,
+"Ê": 102,
+"Ë": 103,
+"Ì": 104,
+"Í": 105,
+"Î": 106,
+
+}
 var GS1charDict = {
     0: "Â",
     1: "!",
@@ -455,14 +565,18 @@ function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
 }
 
-//TODO: create checkdigit
 /**Generate CheckDigit
  * @param  {str} gs1Code code witjout CHeckDigit and Stop character
  * @returns {str} Checkdigit
  */
 function getCheckDigit(gs1Code = "") {
     var ret = "";
-
-    ret = "p";
+    var retVal = 0;
+    //reverse directory,
+    for (var i = 0; i < gs1Code.length; i++) {
+        retVal = retVal + i * GS1charDictRev[gs1Code.slice(i, i + 1)];
+    }
+    ret = GS1charDict[retVal % 103];
+    //ret = "p";
     return ret;
 }
