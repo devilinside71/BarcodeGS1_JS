@@ -571,12 +571,12 @@ function replaceAll(str, find, replace) {
  */
 function getCheckDigit(gs1Code = "") {
     var ret = "";
-    var retVal = 0;
-    var debugTxt = "";
+    var retVal = GS1charDictRev[gs1Code.slice(0,1)];
+    var debugTxt = retVal;
     //reverse directory,
-    for (var i = 1; i < gs1Code.length + 1; i++) {
-        retVal = retVal + i * GS1charDictRev[gs1Code.slice(i - 1, i)];
-        debugTxt = debugTxt + gs1Code.slice(i - 1, i) + ": " + i.toString() + "> " +
+    for (var i = 2; i < gs1Code.length + 1; i++) {
+        retVal = retVal + (i-1) * GS1charDictRev[gs1Code.slice(i - 1, i)];
+        debugTxt = debugTxt + gs1Code.slice(i - 1, i) + ": " + (i-1).toString() + "> " +
             GS1charDictRev[gs1Code.slice(i - 1, i)] + "> " +
             i * GS1charDictRev[gs1Code.slice(i - 1, i)] + "#";
     }
