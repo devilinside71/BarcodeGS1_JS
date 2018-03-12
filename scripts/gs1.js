@@ -49,13 +49,13 @@ function codeCheckClick() {
             "Character"
         ));
     document.getElementById("GS1_4_barcode").innerHTML =
-        convertToXML(createGS1(
+        createGS1(
             document.getElementById("eancode").value,
             document.getElementById("lotcode").value,
             document.getElementById("expirationcode").value,
             document.getElementById("catalogcode").value,
             "Character"
-        ));
+        );
 }
 
 var gtinID = "01";
