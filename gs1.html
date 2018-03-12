@@ -4,7 +4,7 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <title>GS1</title>
-    <link href="styles/barcode.css" rel="stylesheet" type="text/css" />
+    <link href="barcode.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="scripts/gs1.js"></script>
     <script type="text/javascript">
         window.onload = function () {
@@ -15,7 +15,7 @@
 </head>
 
 <body class="bodyStyle">
-    <form method="post">
+    <form method="post" id="debugTest">
         <p>GS1 vonalkód:
             <input name="Text1" type="text" id="barcode" value="(01)05996527176340(10)2014(17)190731(21)280122804" class="auto-style1"
             />
@@ -52,7 +52,8 @@
 
         <p id="test"></p>
 
-    </form>
+    
+		</form>
 
 </body>
 

@@ -74,7 +74,7 @@ var GS1charDictRev = {
     "(": 8,
     ")": 9,
     "*": 10,
-    "&": 11,
+    "+": 11,
     ",": 12,
     "-": 13,
     ".": 14,
@@ -572,11 +572,18 @@ function replaceAll(str, find, replace) {
 function getCheckDigit(gs1Code = "") {
     var ret = "";
     var retVal = 0;
+    var debugTxt = "";
     //reverse directory,
-    for (var i = 1; i <= gs1Code.length; i++) {
-        retVal = retVal + i * GS1charDictRev[gs1Code.slice(i-1, i)];
+    for (var i = 1; i < gs1Code.length + 1; i++) {
+        retVal = retVal + i * GS1charDictRev[gs1Code.slice(i - 1, i)];
+        debugTxt = debugTxt + gs1Code.slice(i - 1, i) + ": " + i.toString() + "> " +
+            GS1charDictRev[gs1Code.slice(i - 1, i)] + "> " +
+            i * GS1charDictRev[gs1Code.slice(i - 1, i)] + "#";
     }
+    debugTxt = debugTxt + retVal + "******";
     ret = GS1charDict[retVal % 103];
+    debugTxt = debugTxt + (retVal % 103) + "******" + ret;
     //ret = "p";
+    document.getElementById("test").innerHTML = debugTxt;
     return ret;
 }
