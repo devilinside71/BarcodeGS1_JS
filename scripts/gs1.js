@@ -573,8 +573,8 @@ function getCheckDigit(gs1Code = "") {
     var ret = "";
     var retVal = 0;
     //reverse directory,
-    for (var i = 0; i < gs1Code.length; i++) {
-        retVal = retVal + i * GS1charDictRev[gs1Code.slice(i, i + 1)];
+    for (var i = 1; i <= gs1Code.length; i++) {
+        retVal = retVal + i * GS1charDictRev[gs1Code.slice(i-1, i)];
     }
     ret = GS1charDict[retVal % 103];
     //ret = "p";
