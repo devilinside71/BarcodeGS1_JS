@@ -438,8 +438,7 @@ function createGS1(eanNumber = "", lotNumber = "", expirationDate = "", catalogN
         ret = ret + GS1charDictC[catalogNumber.slice(4, 6)] + GS1charDictC[catalogNumber.slice(6, 8)];
         ret = ret + "È" + catalogNumber.slice(8);
         //checkdigit
-        //TODO create checkdigit
-        ret = ret + "p";
+        ret = ret + getCheckDigit(ret);
         //Stop
         ret = ret + "Î";
     }
@@ -454,4 +453,16 @@ function createGS1(eanNumber = "", lotNumber = "", expirationDate = "", catalogN
  */
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(find, 'g'), replace);
+}
+
+//TODO: create checkdigit
+/**Generate CheckDigit
+ * @param  {str} gs1Code code witjout CHeckDigit and Stop character
+ * @returns {str} Checkdigit
+ */
+function getCheckDigit(gs1Code = "") {
+    var ret = "";
+
+    ret = "p";
+    return ret;
 }
