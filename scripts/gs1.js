@@ -578,7 +578,7 @@ function getCheckDigit(gs1Code = "") {
         retVal = retVal + (i-1) * GS1charDictRev[gs1Code.slice(i - 1, i)];
         debugTxt = debugTxt + gs1Code.slice(i - 1, i) + ": " + (i-1).toString() + "> " +
             GS1charDictRev[gs1Code.slice(i - 1, i)] + "> " +
-            i * GS1charDictRev[gs1Code.slice(i - 1, i)] + "#";
+            (i-1) * GS1charDictRev[gs1Code.slice(i - 1, i)] + "#";
     }
     debugTxt = debugTxt + retVal + "******";
     ret = GS1charDict[retVal % 103];
