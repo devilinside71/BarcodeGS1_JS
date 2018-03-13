@@ -8,7 +8,7 @@ function codeCheckClick() {
     barcode = formatBarcode(barcode);
 
     document.getElementById("checkGTINID").innerHTML = "GTIN ID: " + checkGTINID(barcode);
-    document.getElementById("formatBarcode").innerHTML = "GS1 formatted barcode: " + formatBarcode(barcode);
+    document.getElementById("formatBarcode").value =  formatBarcode(barcode);
     document.getElementById("verify").innerHTML = "GS1 verified: " + verify(barcode);
     document.getElementById("getEANNumber").innerHTML = "EAN number: " + getEANnumber(barcode);
     document.getElementById("getLOTnumber").innerHTML = "LOT number: " + getLOTnumber(barcode);

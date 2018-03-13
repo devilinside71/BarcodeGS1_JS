@@ -6,6 +6,7 @@
     <title>GS1</title>
     <link href="barcode.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="scripts/gs1.js"></script>
+    <script type="text/javascript" src="scripts/JsBarcode.all.min.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             start();
@@ -36,7 +37,14 @@
 
 
         <p id="checkGTINID"></p>
-        <p id="formatBarcode"></p>
+        <p>GS1 formatted barcode:
+            <input name="Text1" type="text" id="formatBarcode" value="01059965271763401020141719073121280122804" class="auto-style1"
+            />
+        </p>
+        <svg id="barcodePic"></svg>
+        <p>
+        <input name="Button1" type="button" value="Vonlkód" id="codeCheck" onclick="showBarcode()" />
+    </p>
         <p id="verify"></p>
         <p id="getEANNumber"></p>
         <p id="getLOTnumber"></p>
@@ -50,10 +58,18 @@
         <p id="GS1_4_barcode" class="barCode"></p>
 
 
+        <script type="text/javascript">
+            function showBarcode() {
+                JsBarcode("#barcodePic", document.getElementById('formatBarcode').value);
+            }
+        </script>
+
+
+
         <p id="test"></p>
 
-    
-		</form>
+
+    </form>
 
 </body>
 
